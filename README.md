@@ -41,10 +41,12 @@ For the associated research package, a macOS-only release is intentional and acc
 
 The recommended end-user path is:
 
-1. Download the current macOS app from GitHub Releases.
+1. Download the current macOS release from GitHub Releases.
 2. Open `SceneRotatorHeadTracker.app`.
 3. Allow camera access when macOS asks.
 4. Start the listener session in `REAPER`.
+
+The macOS release can be provided either as a zipped `.app` or as a drag-and-drop `.dmg` installer image.
 
 For source-based builds, use the scripts in this repository.
 
@@ -64,6 +66,7 @@ Default target:
 - `headtracker_scenerotator_cocoa_app.py`
 - `build_headtracker_app.sh`
 - `build_headtracker_icon.sh`
+- `build_headtracker_dmg.sh`
 - `assets/`: icon sources and generated `.icns`
 - `docs/`: build notes and paper text
 - `supplementary/`: short reviewer-facing support text
@@ -76,9 +79,10 @@ Use the working Python environment that contains `pyheadtracker`, `opencv-python
 ```bash
 ./build_headtracker_icon.sh
 ./build_headtracker_app.sh
+./build_headtracker_dmg.sh
 ```
 
-The built application will appear in `dist/`.
+The built application will appear in `dist/`. The DMG installer will appear in `release-assets/macos/`.
 
 ## Dependencies
 

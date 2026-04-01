@@ -14,11 +14,10 @@
 
 - Create tag `v0.1`
 - Create GitHub Release titled `SceneRotator HeadTracker v0.1`
-- Upload `SceneRotatorHeadTracker.app` or a zipped macOS app bundle
+- Upload `SceneRotatorHeadTracker-macOS-v0.1.dmg` or `SceneRotatorHeadTracker-macOS-v0.1.zip`
 - Paste the contents of `RELEASE_NOTES_v0.1.md`
 
 ## Optional Research Archiving
 
 - Archive the GitHub release with `Zenodo`
 - Add DOI to the paper and repository README
-
