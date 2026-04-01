@@ -1,0 +1,56 @@
+python.org Build Checklist for SceneRotatorHeadTracker.app
+
+1. Install official Python for macOS from python.org
+
+   Recommended verification:
+   /Library/Frameworks/Python.framework/Versions/3.11/bin/python3 -m tkinter
+
+   Expected result:
+   A small Tk window opens.
+
+2. Create a fresh virtual environment
+
+   /Library/Frameworks/Python.framework/Versions/3.11/bin/python3 -m venv ~/venvs/scene-rotator-app
+
+3. Activate it
+
+   source ~/venvs/scene-rotator-app/bin/activate
+
+4. Install dependencies
+
+   pip install --upgrade pip
+   pip install pyheadtracker opencv-python python-osc pyinstaller
+
+5. Update the build script
+
+   File:
+   /Users/jschuet1/Mac_Support/build_headtracker_app.sh
+
+   Change:
+   VENV_DIR="$HOME/venvs/pyheadtracker"
+
+   To:
+   VENV_DIR="$HOME/venvs/scene-rotator-app"
+
+6. Run the build
+
+   /Users/jschuet1/Mac_Support/build_headtracker_app.sh
+
+7. Test the generated app
+
+   Expected path:
+   /Users/jschuet1/Mac_Support/dist/SceneRotatorHeadTracker.app
+
+8. Verify the following
+
+   - app opens
+   - camera permission prompt appears
+   - tracking works
+   - OSC reaches SceneRotator
+
+9. Optional next step for distribution
+
+   - codesign
+   - notarize
+   - place in:
+     /Users/jschuet1/Mac_Support/JAR_Supplement/headtracker_app/

@@ -1,0 +1,5 @@
+SceneRotator HeadTracker
+Version: 0.1
+
+Recommended bundle name:
+SceneRotatorHeadTracker.app

@@ -1,0 +1,14 @@
+Reviewer Note
+
+This small utility is included to make the listening example easier to evaluate
+without additional hardware setup. It sends webcam-based head-orientation data
+to the IEM SceneRotator in real time, allowing a direct comparison between
+static binaural reproduction and head-tracked binaural reproduction in the
+provided REAPER session.
+
+Suggested use:
+1. Open the REAPER session.
+2. Open `SceneRotatorHeadTracker.app`.
+3. Select a camera and press `Start`.
+4. Press `Calibrate` while looking straight ahead.
+5. Listen over headphones and compare the static and head-tracked conditions.

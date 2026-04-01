@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.DS_Store
+.mplconfig/
+build/
+dist/
+*.spec
+
+# Local release staging
+release-assets/macos/SceneRotatorHeadTracker.app
+
