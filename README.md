@@ -4,6 +4,8 @@
 
 It sends real-time head-orientation data via OSC and was developed as a practical listening aid for head-tracked binaural Ambisonics playback in `REAPER`.
 
+The project was created in the context of a supplementary listening package for a `JAR / Research Catalogue` submission and is intended to make head-tracked binaural listening examples easier to reproduce for reviewers and readers.
+
 ## Features
 
 - Webcam-based markerless head tracking
@@ -34,6 +36,17 @@ For the associated research package, a macOS-only release is intentional and acc
 4. Insert `IEM SceneRotator` and enable OSC receive on the configured port.
 5. Select a camera in the app and press `Start`.
 6. Press `Calibrate` while looking straight ahead.
+
+## Release Download
+
+The recommended end-user path is:
+
+1. Download the current macOS app from GitHub Releases.
+2. Open `SceneRotatorHeadTracker.app`.
+3. Allow camera access when macOS asks.
+4. Start the listener session in `REAPER`.
+
+For source-based builds, use the scripts in this repository.
 
 ## OSC
 
@@ -81,6 +94,22 @@ This repository is intended to be released under the `MIT License`.
 
 The app source is your own code. `REAPER` and the `IEM Plug-in Suite` are external dependencies and should be obtained separately from their own sources.
 
+## Citation And Research Use
+
+If you reference this software in a paper, thesis, or artistic research submission, it is a good idea to cite both:
+
+- the accompanying paper or exposition
+- the GitHub repository or archived release of this software
+
+For a stable scholarly reference, an archived GitHub release via `Zenodo` would be the cleanest next step.
+
 ## Research Context
 
 This tool was created to support a supplementary listening package for a `JAR / Research Catalogue` submission. It is intended to help reviewers and readers compare static binaural reproduction with head-tracked binaural reproduction using the same Ambisonics source material and rendering chain discussed in the paper.
+
+## Notes For Reviewers
+
+- The current public build is `macOS` only.
+- This is sufficient for the present supplementary listening package as long as the platform requirement is stated clearly.
+- `REAPER` and the `IEM Plug-in Suite` must be installed separately.
+- A static binaural reference render is recommended alongside the interactive head-tracked example.
