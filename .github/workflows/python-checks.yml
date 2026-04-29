@@ -1,16 +1,57 @@
-name: Python checks
+name: Cross-platform smoke tests
 
-on: [push]
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
-  syntax:
-    runs-on: ubuntu-latest
+  smoke:
+    name: ${{ matrix.label }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: Linux
+            os: ubuntu-latest
+          - label: Windows
+            os: windows-latest
+          - label: macOS
+            os: macos-latest
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Compile Python sources
+
+      - name: Install Linux system libraries
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-tk libgl1 libglib2.0-0 v4l-utils
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-crossplatform.txt
+
+      - name: Compile sources
         run: |
           python -m py_compile $(git ls-files '*.py')
+
+      - name: Smoke test Tkinter and core imports
+        run: |
+          python - <<'PY'
+          import sys
+          import tkinter
+          import scene_rotator_headtracker_core as core
+
+          print("python:", sys.version)
+          print("tkinter:", tkinter.TkVersion)
+          print("app:", core.APP_NAME, core.APP_VERSION)
+          print("cameras:", core.available_cameras(max_index=2))
+          PY
