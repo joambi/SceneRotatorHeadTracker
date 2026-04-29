@@ -8,4 +8,5 @@ dist/
 
 # Local release staging
 release-assets/macos/SceneRotatorHeadTracker.app
-
+release-assets/macos/*.dmg
+release-assets/macos/*.zip

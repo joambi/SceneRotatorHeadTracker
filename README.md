@@ -1,6 +1,6 @@
 # SceneRotator HeadTracker
 
-`SceneRotator HeadTracker` is a lightweight macOS utility for webcam-based head tracking with the `IEM SceneRotator`.
+`SceneRotator HeadTracker` is a lightweight utility for webcam-based head tracking with the `IEM SceneRotator`.
 
 It sends real-time head-orientation data via OSC and was developed as a practical listening aid for head-tracked binaural Ambisonics playback in `REAPER`.
 
@@ -13,16 +13,17 @@ The project was created in the context of a supplementary listening package for 
 - `Yaw only` and `Full YPR` modes
 - `Calibrate` and `Recenter`
 - Native macOS app build
+- Cross-platform Tkinter app for Windows and Linux builds
 
 ## Current Platform
 
-The current release targets `macOS`.
+The current packaged release targets `macOS`.
 
-For the associated research package, a macOS-only release is intentional and acceptable as long as this requirement is stated clearly. `REAPER` and the `IEM Plug-in Suite` remain external dependencies.
+The repository also contains a cross-platform Tkinter app that can be built natively on Windows and Linux. `REAPER` and the `IEM Plug-in Suite` remain external dependencies.
 
 ## Requirements
 
-- `macOS`
+- `macOS`, `Windows`, or `Linux`
 - `REAPER`
 - `IEM Plug-in Suite`
 - A webcam
@@ -63,8 +64,12 @@ Default target:
 
 ## Repository Layout
 
-- `headtracker_scenerotator_cocoa_app.py`
-- `build_headtracker_app.sh`
+- `scene_rotator_headtracker_core.py`
+- `headtracker_scenerotator_cocoa_app.py`: native macOS app
+- `headtracker_scenerotator_tk_app.py`: cross-platform Tkinter app
+- `build_headtracker_app.sh`: native macOS `.app`
+- `build_headtracker_windows.ps1`: Windows `.exe` folder build
+- `build_headtracker_linux.sh`: Linux executable folder build
 - `build_headtracker_icon.sh`
 - `build_headtracker_dmg.sh`
 - `assets/`: icon sources and generated `.icns`
@@ -74,7 +79,7 @@ Default target:
 
 ## Build
 
-Use the working Python environment that contains `pyheadtracker`, `opencv-python`, `python-osc`, `pyobjc`, and `pyinstaller`.
+Use the working Python environment that contains `pyheadtracker`, `opencv-python`, `python-osc`, and `pyinstaller`. The native macOS app additionally needs `pyobjc`.
 
 ```bash
 ./build_headtracker_icon.sh
@@ -83,6 +88,22 @@ Use the working Python environment that contains `pyheadtracker`, `opencv-python
 ```
 
 The built application will appear in `dist/`. The DMG installer will appear in `release-assets/macos/`.
+
+For Windows, run this on a Windows machine with Python 3.11 installed:
+
+```powershell
+.\build_headtracker_windows.ps1
+```
+
+The built executable will appear in `dist-windows\SceneRotatorHeadTracker\`.
+
+For Linux, run this on the target Linux distribution:
+
+```bash
+./build_headtracker_linux.sh
+```
+
+The built executable will appear in `dist-linux/SceneRotatorHeadTracker/`.
 
 ## Dependencies
 

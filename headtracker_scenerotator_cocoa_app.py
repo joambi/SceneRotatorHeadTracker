@@ -54,7 +54,7 @@ import objc
 
 
 APP_NAME = "SceneRotator HeadTracker"
-APP_VERSION = "0.1"
+APP_VERSION = "0.2"
 MODEL_RELATIVE_PATH = "pyheadtracker/data/mediapipe-facelandmarker/face_landmarker_v2_with_blendshapes.task"
 
 
@@ -313,6 +313,15 @@ class HeadTrackerEngine:
                 self.tracker.close()
             except Exception:
                 pass
+
+
+from scene_rotator_headtracker_core import (
+    APP_NAME,
+    APP_VERSION,
+    HeadTrackerEngine,
+    available_cameras,
+    first_working_camera,
+)
 
 
 class AppDelegate(NSObject):

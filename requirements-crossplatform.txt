@@ -1,0 +1,4 @@
+pyheadtracker
+opencv-python
+python-osc
+pyinstaller

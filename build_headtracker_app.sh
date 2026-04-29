@@ -10,7 +10,7 @@ BUILD_DIR="$SCRIPT_DIR/build"
 APP_NAME="SceneRotatorHeadTracker"
 DISPLAY_NAME="SceneRotator HeadTracker"
 BUNDLE_ID="at.iem.SceneRotatorHeadTracker"
-APP_VERSION="0.1"
+APP_VERSION="0.2"
 MPL_DIR="$SCRIPT_DIR/.mplconfig"
 ICON_FILE="$SCRIPT_DIR/assets/SceneRotatorHeadTracker.icns"
 
