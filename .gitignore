@@ -3,12 +3,18 @@ __pycache__/
 .DS_Store
 .cache/
 .mplconfig/
+.venv/
+.venv-*/
 .venv-tk/
 build/
+build-*/
 dist/
+dist-*/
 *.spec
+*.log
 
 # Local release staging
+release-assets/
 release-assets/macos/SceneRotatorHeadTracker.app
 release-assets/macos/*.dmg
 release-assets/macos/*.zip
