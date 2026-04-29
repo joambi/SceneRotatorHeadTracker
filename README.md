@@ -105,6 +105,9 @@ For Linux, run this on the target Linux distribution:
 
 The built executable will appear in `dist-linux/SceneRotatorHeadTracker/`.
 
+Detailed build and verification steps for Windows and Linux are in
+[`docs/BUILD_WINDOWS_LINUX.md`](docs/BUILD_WINDOWS_LINUX.md).
+
 ## Dependencies
 
 This repository does not bundle the `IEM Plug-in Suite`.
