@@ -6,15 +6,26 @@ Platform-neutral tracking and OSC core for SceneRotator HeadTracker.
 from __future__ import annotations
 
 import math
+import os
 import sys
 import threading
 import time
+from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable, Optional, Sequence
+from typing import Callable, Iterator, Optional, Sequence
+
+LOCAL_CACHE_DIR = Path(__file__).resolve().parent / ".cache"
+LOCAL_MPLCONFIG_DIR = Path(__file__).resolve().parent / ".mplconfig"
+try:
+    LOCAL_CACHE_DIR.mkdir(exist_ok=True)
+    LOCAL_MPLCONFIG_DIR.mkdir(exist_ok=True)
+    os.environ.setdefault("XDG_CACHE_HOME", str(LOCAL_CACHE_DIR))
+    os.environ.setdefault("MPLCONFIGDIR", str(LOCAL_MPLCONFIG_DIR))
+except OSError:
+    pass
 
 import cv2
-import pyheadtracker as pht
 from pythonosc.udp_client import SimpleUDPClient
 
 
@@ -117,15 +128,42 @@ def average_pose(samples: Sequence[YPRState]) -> Optional[YPRState]:
     )
 
 
-def available_cameras(max_index: int = 5) -> list[int]:
+@contextmanager
+def suppress_native_stderr() -> Iterator[None]:
+    original_stderr = os.dup(2)
+    try:
+        with open(os.devnull, "w") as devnull:
+            os.dup2(devnull.fileno(), 2)
+            yield
+    finally:
+        os.dup2(original_stderr, 2)
+        os.close(original_stderr)
+
+
+def available_cameras(max_index: int = 5, stop_after_misses: int = 2) -> list[int]:
     indices: list[int] = []
+    misses_after_found = 0
     for index in range(max_index + 1):
-        cap = cv2.VideoCapture(index)
-        if cap.isOpened():
-            ok, _frame = cap.read()
-            if ok:
-                indices.append(index)
-        cap.release()
+        cap = None
+        ok = False
+        try:
+            with suppress_native_stderr():
+                cap = cv2.VideoCapture(index)
+                if cap.isOpened():
+                    ok, _frame = cap.read()
+        finally:
+            if cap is not None:
+                cap.release()
+
+        if ok:
+            indices.append(index)
+            misses_after_found = 0
+            continue
+
+        if indices:
+            misses_after_found += 1
+            if misses_after_found >= stop_after_misses:
+                break
     return indices
 
 
@@ -182,6 +220,8 @@ class HeadTrackerEngine:
         model_path = resolve_model_path()
         if model_path is None:
             raise RuntimeError("Could not locate the Face Landmarker model in the app bundle.")
+        import pyheadtracker as pht
+
         self.model_path = model_path
         self.tracker = pht.cam.MPFaceLandmarker(
             camera_index,

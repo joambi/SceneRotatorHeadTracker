@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
 .DS_Store
+.cache/
 .mplconfig/
 .venv-tk/
 build/
