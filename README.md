@@ -42,12 +42,16 @@ The repository also contains a cross-platform Tkinter app that can be built nati
 
 The recommended end-user path is:
 
-1. Download the current macOS release from GitHub Releases.
+1. Download the current macOS release:
+   [`SceneRotatorHeadTracker-macOS-v0.2.dmg`](https://github.com/joambi/SceneRotatorHeadTracker/releases/download/v0.2-beta/SceneRotatorHeadTracker-macOS-v0.2.dmg)
 2. Open `SceneRotatorHeadTracker.app`.
 3. Allow camera access when macOS asks.
 4. Start the listener session in `REAPER`.
 
-The macOS release can be provided either as a zipped `.app` or as a drag-and-drop `.dmg` installer image.
+All release assets are listed on the
+[`SceneRotator HeadTracker v0.2` GitHub release page](https://github.com/joambi/SceneRotatorHeadTracker/releases/tag/v0.2-beta).
+
+The macOS release is provided as a drag-and-drop `.dmg` installer image.
 
 For source-based builds, use the scripts in this repository.
 
@@ -89,7 +93,9 @@ Use the working Python environment that contains `pyheadtracker`, `opencv-python
 
 The built application will appear in `dist/`. The DMG installer will appear in `release-assets/macos/`.
 
-For Windows, run this on a Windows machine with Python 3.11 installed:
+For Windows, clone or download the repository from
+[`github.com/joambi/SceneRotatorHeadTracker`](https://github.com/joambi/SceneRotatorHeadTracker),
+then run this on a Windows machine with Python 3.11 installed:
 
 ```powershell
 .\build_headtracker_windows.ps1
@@ -97,7 +103,9 @@ For Windows, run this on a Windows machine with Python 3.11 installed:
 
 The built executable will appear in `dist-windows\SceneRotatorHeadTracker\`.
 
-For Linux, run this on the target Linux distribution:
+For Linux, clone or download the repository from
+[`github.com/joambi/SceneRotatorHeadTracker`](https://github.com/joambi/SceneRotatorHeadTracker),
+then run this on the target Linux distribution:
 
 ```bash
 ./build_headtracker_linux.sh

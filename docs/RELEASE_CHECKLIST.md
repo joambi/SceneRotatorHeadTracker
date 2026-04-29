@@ -12,10 +12,12 @@
 
 ## GitHub Release
 
-- Create tag `v0.1`
-- Create GitHub Release titled `SceneRotator HeadTracker v0.1`
-- Upload `SceneRotatorHeadTracker-macOS-v0.1.dmg` or `SceneRotatorHeadTracker-macOS-v0.1.zip`
-- Paste the contents of `RELEASE_NOTES_v0.1.md`
+- Create or update tag `v0.2-beta`
+- Create GitHub Release titled `SceneRotator HeadTracker v0.2`
+- Upload `SceneRotatorHeadTracker-macOS-v0.2.dmg`
+- Verify the download URL:
+  `https://github.com/joambi/SceneRotatorHeadTracker/releases/download/v0.2-beta/SceneRotatorHeadTracker-macOS-v0.2.dmg`
+- Keep large `.dmg` and `.zip` files out of the normal Git repository
 
 ## Optional Research Archiving
 

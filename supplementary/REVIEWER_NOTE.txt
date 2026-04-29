@@ -6,6 +6,12 @@ to the IEM SceneRotator in real time, allowing a direct comparison between
 static binaural reproduction and head-tracked binaural reproduction in the
 provided REAPER session.
 
+Software repository:
+https://github.com/joambi/SceneRotatorHeadTracker
+
+macOS app download:
+https://github.com/joambi/SceneRotatorHeadTracker/releases/download/v0.2-beta/SceneRotatorHeadTracker-macOS-v0.2.dmg
+
 Suggested use:
 1. Open the REAPER session.
 2. Open `SceneRotatorHeadTracker.app`.

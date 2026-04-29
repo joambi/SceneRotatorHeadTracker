@@ -13,6 +13,18 @@ Both variants share the platform-neutral tracking engine:
 scene_rotator_headtracker_core.py
 ```
 
+Repository:
+
+```text
+https://github.com/joambi/SceneRotatorHeadTracker
+```
+
+Current macOS release download:
+
+```text
+https://github.com/joambi/SceneRotatorHeadTracker/releases/download/v0.2-beta/SceneRotatorHeadTracker-macOS-v0.2.dmg
+```
+
 ## What Can Be Verified From macOS
 
 If you only have a Mac, you can verify the shared Python code and the macOS
@@ -49,7 +61,13 @@ from `python.org` includes Tkinter by default and is the recommended option.
 1. Install `REAPER`.
 2. Install the `IEM Plug-in Suite`.
 3. Install Python 3.11 from `python.org`.
-4. Download or clone this repository.
+4. Download or clone this repository:
+
+```powershell
+git clone https://github.com/joambi/SceneRotatorHeadTracker.git
+cd SceneRotatorHeadTracker
+```
+
 5. Open PowerShell in the repository folder.
 6. Build the app:
 
@@ -134,7 +152,13 @@ sudo apt update
 sudo apt install python3 python3-venv python3-tk libgl1 libglib2.0-0 v4l-utils
 ```
 
-4. Download or clone this repository.
+4. Download or clone this repository:
+
+```bash
+git clone https://github.com/joambi/SceneRotatorHeadTracker.git
+cd SceneRotatorHeadTracker
+```
+
 5. Open a terminal in the repository folder.
 6. Build the app:
 

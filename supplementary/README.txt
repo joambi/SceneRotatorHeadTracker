@@ -1,8 +1,14 @@
 SceneRotator HeadTracker
-Version 0.1
+Version 0.2
 
 This folder contains the lightweight head-tracking application used to control
 the IEM SceneRotator via OSC for the supplementary listening package.
+
+Download:
+https://github.com/joambi/SceneRotatorHeadTracker/releases/download/v0.2-beta/SceneRotatorHeadTracker-macOS-v0.2.dmg
+
+Repository:
+https://github.com/joambi/SceneRotatorHeadTracker
 
 Quick Start:
 1. Open `SceneRotatorHeadTracker.app`.
