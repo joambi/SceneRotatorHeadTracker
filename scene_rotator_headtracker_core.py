@@ -129,14 +129,29 @@ def average_pose(samples: Sequence[YPRState]) -> Optional[YPRState]:
 
 
 @contextmanager
-def suppress_native_stderr() -> Iterator[None]:
+def suppress_native_output() -> Iterator[None]:
+    original_stdout = os.dup(1)
     original_stderr = os.dup(2)
+    python_stdout = sys.stdout
+    python_stderr = sys.stderr
     try:
         with open(os.devnull, "w") as devnull:
+            sys.stdout = devnull
+            sys.stderr = devnull
+            os.dup2(devnull.fileno(), 1)
             os.dup2(devnull.fileno(), 2)
             yield
     finally:
+        try:
+            sys.stdout.flush()
+            sys.stderr.flush()
+        except Exception:
+            pass
+        sys.stdout = python_stdout
+        sys.stderr = python_stderr
+        os.dup2(original_stdout, 1)
         os.dup2(original_stderr, 2)
+        os.close(original_stdout)
         os.close(original_stderr)
 
 
@@ -147,7 +162,7 @@ def available_cameras(max_index: int = 5, stop_after_misses: int = 2) -> list[in
         cap = None
         ok = False
         try:
-            with suppress_native_stderr():
+            with suppress_native_output():
                 cap = cv2.VideoCapture(index)
                 if cap.isOpened():
                     ok, _frame = cap.read()
@@ -182,7 +197,8 @@ def resolve_model_path() -> Optional[str]:
             return str(candidate)
 
     try:
-        import pyheadtracker
+        with suppress_native_output():
+            import pyheadtracker
 
         package_candidate = (
             Path(pyheadtracker.__file__).resolve().parent
@@ -220,14 +236,15 @@ class HeadTrackerEngine:
         model_path = resolve_model_path()
         if model_path is None:
             raise RuntimeError("Could not locate the Face Landmarker model in the app bundle.")
-        import pyheadtracker as pht
+        with suppress_native_output():
+            import pyheadtracker as pht
 
-        self.model_path = model_path
-        self.tracker = pht.cam.MPFaceLandmarker(
-            camera_index,
-            orient_format="ypr",
-            model_weights=self.model_path,
-        )
+            self.model_path = model_path
+            self.tracker = pht.cam.MPFaceLandmarker(
+                camera_index,
+                orient_format="ypr",
+                model_weights=self.model_path,
+            )
         self.stop_event = threading.Event()
         self.calibrate_event = threading.Event()
         self.zero_event = threading.Event()
@@ -270,8 +287,9 @@ class HeadTrackerEngine:
     def _run(self) -> None:
         try:
             self.status_callback(f"Opening camera {self.camera_index}...")
-            self.tracker.open()
-            self.tracker.zero()
+            with suppress_native_output():
+                self.tracker.open()
+                self.tracker.zero()
             self.status_callback("Running")
             frame_interval = 1.0 / self.max_fps
             while not self.stop_event.is_set():
